@@ -1,0 +1,7 @@
+cvxpy
+pandas
+numpy
+plotly
+requests
+openpyxl
+jupyter
