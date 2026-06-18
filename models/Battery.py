@@ -114,12 +114,31 @@ class BatteryModel:
 
 
 if __name__ == "__main__":
+    '''
     battery = BatteryModel(e_max=2.0, p_max=1.0)
 
     print("── Initial battery state ──")
     for k, v in battery.summary().items():
         print(f"  {k:<25} : {v}")
 
+    '''
+    import yaml
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--profile", type=str, default="small",
+                        help="Battery profile from config.yaml : small / medium / large")
+    args = parser.parse_args()
+
+    with open("config.yaml") as f:
+        cfg = yaml.safe_load(f)["batteries"][args.profile]
+
+    battery = BatteryModel(**cfg)
+
+    print(f"\n── Profile : {args.profile} ──")
+    for k, v in battery.summary().items():
+        print(f"  {k:<25} : {v}")
+    
     print(f"\n── SoC evolution test ──")
     soc = battery.soc_init
     print(f"  t=0  SoC={soc:.3f} MWh")
