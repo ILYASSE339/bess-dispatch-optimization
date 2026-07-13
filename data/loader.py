@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Imports
 
 import pandas as pd
@@ -31,6 +34,15 @@ def load_day_ahead_prices(filepath: str) -> pd.DataFrame:
     df = df[["timestamp","date", "time", "price_eur_mwh"]]
     return df
 
+def load_processed(filepath: str) -> pd.DataFrame:
+    """
+    Load the already-processed CSV directly.
+    No re-parsing needed — dates are already clean.
+    """
+    df = pd.read_csv(filepath)
+    df["date"] = pd.to_datetime(df["date"]).dt.date
+    df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True).dt.tz_convert("Europe/Paris")
+    return df
 
 if __name__ == "__main__":
     filepath = "data/raw/energy-charts_Electricity_production_and_spot_prices_in_France_in_2024.csv"
