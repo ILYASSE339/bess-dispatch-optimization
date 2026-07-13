@@ -17,3 +17,18 @@ sur le marché spot électrique français — données réelles ENTSO-E.
 - Données : ENTSO-E Transparency Platform
 
 ## Structure
+
+## Résultats backtest 2024
+
+| Métrique | Valeur |
+|---|---|
+| Période | 2024 — 365 jours |
+| Profit total | 56 425 EUR |
+| Profit moyen / jour | 154.59 EUR |
+| Meilleure journée | 17 avril 2024 — 401 EUR |
+| Jours profitables | 365 / 365 |
+| Capacité finale | 1.923 MWh (dégradation aging) |
+
+> **Limite :** modèle déterministe avec perfect foresight sur les prix J+1.
+> En production, les prix seraient forecastés — ce qui réduirait la performance réelle.
+> La couche stochastique (Monte Carlo) est la prochaine étape.
